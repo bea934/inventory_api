@@ -12,8 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Servicio que encapsula la lógica de negocio relacionada con productos y
- * delega las operaciones persistentes al {@link ProductRepository}. Es reutilizado
- * tanto por el controlador REST ({@code /api/products}) como por el controlador de vistas ({@code /products}).
+ * delega las operaciones persistentes al {@link ProductRepository}. Es
+ * reutilizado tanto por el controlador REST ({@code /api/products}) como por el
+ * controlador de vistas ({@code /products}).
  */
 @Slf4j
 @Service
@@ -27,7 +28,7 @@ public class ProductService {
     /**
      * Obtiene todos los productos registrados en la base de datos.
      *
-     * @return lista completa de productos
+     * @return lista completa de productos disponibles
      */
     @Transactional(readOnly = true)
     public List<Product> findAll() {
@@ -36,11 +37,11 @@ public class ProductService {
     }
 
     /**
-     * Busca un producto por su identificador o lanza una excepción controlada
-     * si no existe.
+     * Busca un producto por su identificador.
      *
      * @param id identificador del producto
      * @return producto encontrado
+     * @throws ProductNotFoundException cuando no existe un registro con el id solicitado
      */
     @Transactional(readOnly = true)
     public Product findById(Long id) {
@@ -52,7 +53,7 @@ public class ProductService {
     /**
      * Crea un nuevo producto a partir de los datos enviados en el DTO.
      *
-     * @param request datos a persistir
+     * @param request datos validados a persistir
      * @return producto guardado
      */
     public Product create(ProductRequest request) {
@@ -67,6 +68,7 @@ public class ProductService {
      * @param id identificador del producto a actualizar
      * @param request datos nuevos
      * @return producto actualizado
+     * @throws ProductNotFoundException si el producto no existe
      */
     public Product update(Long id, ProductRequest request) {
         log.info("Actualizando producto con id {}", id);
@@ -79,6 +81,7 @@ public class ProductService {
      * Elimina un producto en base a su identificador.
      *
      * @param id identificador del producto a eliminar
+     * @throws ProductNotFoundException si el producto no existe
      */
     public void delete(Long id) {
         log.info("Eliminando producto con id {}", id);
@@ -86,6 +89,14 @@ public class ProductService {
         productRepository.delete(product);
     }
 
+    /**
+     * Obtiene un producto por id y lo transforma a {@link ProductRequest} para
+     * poblar formularios de la UI.
+     *
+     * @param id identificador del producto
+     * @return DTO listo para ser mostrado en formularios
+     * @throws ProductNotFoundException si no existe el producto
+     */
     @Transactional(readOnly = true)
     public ProductRequest getProductForm(Long id) {
         Product product = findById(id);
