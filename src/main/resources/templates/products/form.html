@@ -13,7 +13,7 @@
                         </p>
                         <h2 class="h4 mb-0" th:text="${formTitle}">Formulario</h2>
                     </div>
-                    <a class="btn btn-outline-secondary" th:href="@{/ui/products}">Cancelar</a>
+                    <a class="btn btn-outline-secondary" th:href="@{/products}">Cancelar</a>
                 </div>
                 <form th:action="@{${formAction}}" th:object="${product}" method="post" class="row g-3">
                     <div class="col-12">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-end gap-2 pt-3">
                         <button type="submit" class="btn btn-success" th:text="${submitLabel}">Guardar</button>
-                        <a class="btn btn-link text-decoration-none" th:href="@{/ui/products}">Volver a la lista</a>
+                        <a class="btn btn-link text-decoration-none" th:href="@{/products}">Volver a la lista</a>
                     </div>
                 </form>
             </div>

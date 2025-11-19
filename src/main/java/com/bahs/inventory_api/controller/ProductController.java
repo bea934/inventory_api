@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador REST encargado de exponer los endpoints CRUD para productos.
  */
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -57,7 +57,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductRequest request) {
         Product created = productService.create(request);
-        return ResponseEntity.created(URI.create("/products/" + created.getId())).body(created);
+        return ResponseEntity.created(URI.create("/api/products/" + created.getId())).body(created);
     }
 
     /**
