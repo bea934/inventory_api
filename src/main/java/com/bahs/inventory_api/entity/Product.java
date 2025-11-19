@@ -14,8 +14,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Entidad que representa un producto dentro del inventario. Cada instancia se
- * mapea a la tabla "products" en la base de datos H2 en memoria.
+ * Entidad JPA que representa un producto dentro del inventario. Cada campo se
+ * persiste en la tabla {@code products} almacenada en la base H2 en memoria y
+ * es reutilizada tanto por la API REST bajo {@code /api/products} como por la
+ * UI disponible en {@code /products}.
  */
 @Entity
 @Table(name = "products")
@@ -24,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Product {
 
-    /** Identificador único del producto. */
+    /** Identificador único del producto (clave primaria autogenerada). */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,15 +35,15 @@ public class Product {
     @Column(nullable = false, length = 100)
     private String name;
 
-    /** Descripción opcional del producto. */
+    /** Descripción opcional del producto, permite texto extendido. */
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    /** Precio del producto, debe ser mayor a 0. */
+    /** Precio del producto en moneda local, validado para ser mayor a 0. */
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal price;
 
-    /** Stock disponible, debe ser igual o mayor a 0. */
+    /** Stock disponible en unidades, nunca negativo. */
     @Column(nullable = false)
     private Integer stock;
 

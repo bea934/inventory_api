@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * Maneja las excepciones del controlador REST {@link ProductController} y retorna respuestas JSON consistentes.
+ * Maneja las excepciones generadas por el controlador REST
+ * {@link ProductController}. Se restringe al API bajo {@code /api/products} para
+ * mantener aislada la experiencia HTML de la UI, retornando respuestas JSON
+ * consistentes cuando ocurre un error.
  */
 @RestControllerAdvice(assignableTypes = ProductController.class)
 public class GlobalExceptionHandler {

@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 /**
- * DTO utilizado para recibir datos de creación/actualización de productos con
- * sus respectivas validaciones.
+ * DTO utilizado por la API REST y la UI para recibir los datos de
+ * creación/actualización de productos. Aplica validaciones de Bean Validation
+ * (nombre obligatorio, precio positivo y stock no negativo) antes de delegar en
+ * el servicio.
  */
 @Data
 public class ProductRequest {

@@ -27,6 +27,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Suite de pruebas que valida el comportamiento de la API REST expuesta bajo
+ * <code>/api/products</code>. Se usan dobles de prueba para el servicio a fin
+ * de verificar que los controladores serializan correctamente las respuestas y
+ * respetan los códigos HTTP esperados.
+ */
 @WebMvcTest(ProductController.class)
 class ProductControllerTest {
 
@@ -39,6 +45,10 @@ class ProductControllerTest {
     @MockBean
     private ProductService productService;
 
+    /**
+     * Verifica que el endpoint de listado devuelva un arreglo JSON con código
+     * 200 cuando existen productos registrados.
+     */
     @Test
     @DisplayName("getAllProducts_shouldReturnOkAndJsonArray")
     void getAllProducts_shouldReturnOkAndJsonArray() throws Exception {
@@ -55,6 +65,10 @@ class ProductControllerTest {
             .andExpect(jsonPath("$[1].stock", is(35)));
     }
 
+    /**
+     * Comprueba que al solicitar un producto por ID existente se retorne 200 y
+     * el cuerpo contenga los datos serializados.
+     */
     @Test
     @DisplayName("getProductById_shouldReturnOk_whenProductExists")
     void getProductById_shouldReturnOk_whenProductExists() throws Exception {
@@ -67,6 +81,10 @@ class ProductControllerTest {
             .andExpect(jsonPath("$.name", is("Monitor")));
     }
 
+    /**
+     * Garantiza que se responda 404 con un payload de error cuando el servicio
+     * indica que un ID buscado no existe.
+     */
     @Test
     @DisplayName("getProductById_shouldReturnNotFound_whenProductDoesNotExist")
     void getProductById_shouldReturnNotFound_whenProductDoesNotExist() throws Exception {
@@ -78,6 +96,10 @@ class ProductControllerTest {
             .andExpect(jsonPath("$.message", is("Producto con id 99 no encontrado")));
     }
 
+    /**
+     * Valida que la creación con datos válidos responda 201 y retorne el
+     * producto persistido en formato JSON.
+     */
     @Test
     @DisplayName("createProduct_shouldReturnCreated_whenRequestIsValid")
     void createProduct_shouldReturnCreated_whenRequestIsValid() throws Exception {
@@ -93,6 +115,10 @@ class ProductControllerTest {
             .andExpect(jsonPath("$.name", is("Tablet")));
     }
 
+    /**
+     * Asegura que las validaciones Bean Validation se propaguen hasta el
+     * consumidor devolviendo 400 y el detalle de errores de campos.
+     */
     @Test
     @DisplayName("createProduct_shouldReturnBadRequest_whenValidationFails")
     void createProduct_shouldReturnBadRequest_whenValidationFails() throws Exception {
@@ -109,6 +135,10 @@ class ProductControllerTest {
             .andExpect(jsonPath("$.errors", hasSize(3)));
     }
 
+    /**
+     * Verifica que una eliminación exitosa responda 204 sin cuerpo cuando el
+     * servicio no arroja excepciones.
+     */
     @Test
     @DisplayName("deleteProduct_shouldReturnNoContent")
     void deleteProduct_shouldReturnNoContent() throws Exception {
@@ -118,6 +148,10 @@ class ProductControllerTest {
             .andExpect(status().isNoContent());
     }
 
+    /**
+     * Construye un producto simulado con los datos proporcionados para reutilizar
+     * en los diferentes escenarios de prueba.
+     */
     private Product buildProduct(Long id, String name, BigDecimal price, int stock) {
         Product product = new Product();
         product.setId(id);
@@ -129,6 +163,10 @@ class ProductControllerTest {
         return product;
     }
 
+    /**
+     * Genera una solicitud de producto válida con los valores indicados para
+     * alimentar las pruebas del controlador.
+     */
     private ProductRequest buildRequest(String name, BigDecimal price, int stock) {
         ProductRequest request = new ProductRequest();
         request.setName(name);

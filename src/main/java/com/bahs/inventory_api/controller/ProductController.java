@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador REST que expone los endpoints CRUD bajo la ruta base {@code /api/products}.
+ * Controlador REST que expone los endpoints CRUD bajo la ruta base
+ * {@code /api/products}. Todos los métodos retornan/consumen JSON y están
+ * pensados para integrarse con clientes externos.
  */
 @RestController
 @RequestMapping("/api/products")
@@ -30,7 +32,7 @@ public class ProductController {
     /**
      * Maneja {@code GET /api/products} y retorna todos los productos disponibles.
      *
-     * @return respuesta con la lista completa
+     * @return respuesta con la lista completa en formato JSON
      */
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
@@ -38,7 +40,8 @@ public class ProductController {
     }
 
     /**
-     * Maneja {@code GET /api/products/{id}} para recuperar un producto por su identificador.
+     * Maneja {@code GET /api/products/{id}} para recuperar un producto por su
+     * identificador.
      *
      * @param id identificador del producto
      * @return respuesta con el producto encontrado
@@ -49,7 +52,8 @@ public class ProductController {
     }
 
     /**
-     * Maneja {@code POST /api/products} para crear un nuevo producto con validación.
+     * Maneja {@code POST /api/products} para crear un nuevo producto con
+     * validación.
      *
      * @param request DTO con los datos del producto
      * @return respuesta con el recurso creado y cabecera Location

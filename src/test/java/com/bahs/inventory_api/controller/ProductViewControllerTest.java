@@ -19,6 +19,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Pruebas enfocadas en el controlador MVC que sirve las vistas Thymeleaf bajo
+ * <code>/products</code>. Se simula el servicio para validar modelos, vistas y
+ * redirecciones esperadas.
+ */
 @WebMvcTest(ProductViewController.class)
 class ProductViewControllerTest {
 
@@ -28,6 +33,10 @@ class ProductViewControllerTest {
     @MockBean
     private ProductService productService;
 
+    /**
+     * Asegura que la ruta GET /products cargue la vista de listado con el
+     * atributo de modelo "products".
+     */
     @Test
     @DisplayName("getProductsList_shouldRenderListView")
     void getProductsList_shouldRenderListView() throws Exception {
@@ -40,6 +49,10 @@ class ProductViewControllerTest {
                 .andExpect(view().name("products/list"));
     }
 
+    /**
+     * Verifica que el formulario de creación exponga un DTO vacío y renderice
+     * la plantilla correcta.
+     */
     @Test
     @DisplayName("showCreateForm_shouldRenderFormView")
     void showCreateForm_shouldRenderFormView() throws Exception {
@@ -49,6 +62,10 @@ class ProductViewControllerTest {
                 .andExpect(view().name("products/form"));
     }
 
+    /**
+     * Comprueba que una creación válida mediante formulario redirija al listado
+     * tras invocar el servicio.
+     */
     @Test
     @DisplayName("postCreateProduct_shouldRedirectOnSuccess")
     void postCreateProduct_shouldRedirectOnSuccess() throws Exception {
@@ -66,6 +83,10 @@ class ProductViewControllerTest {
                 .andExpect(redirectedUrl("/products"));
     }
 
+    /**
+     * Confirma que los errores de validación mantienen al usuario en el formulario
+     * mostrando los mensajes correspondientes en el modelo.
+     */
     @Test
     @DisplayName("postCreateProduct_shouldReturnFormView_whenValidationFails")
     void postCreateProduct_shouldReturnFormView_whenValidationFails() throws Exception {
