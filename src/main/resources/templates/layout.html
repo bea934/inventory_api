@@ -20,12 +20,6 @@
             <h1 class="h4 mb-0 fw-semibold">Inventory Manager</h1>
             <p class="mb-0 text-white-50">Control centralizado del catálogo de productos</p>
         </div>
-        <nav class="mt-3 mt-md-0 d-flex gap-2">
-            <a class="btn btn-outline-light btn-sm" th:href="@{/ui/products}">UI de productos</a>
-            <a class="btn btn-outline-light btn-sm" th:href="@{/products}" target="_blank" rel="noopener">
-                API REST
-            </a>
-        </nav>
     </div>
 </header>
 <main class="container flex-grow-1 py-4" th:insert="${content}"></main>

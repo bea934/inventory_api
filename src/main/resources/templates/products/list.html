@@ -42,11 +42,20 @@
                             <span class="badge bg-secondary-subtle text-secondary" th:text="${product.stock}">0</span>
                         </td>
                         <td class="text-end">
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a class="btn btn-outline-primary" th:href="@{'/ui/products/' + ${product.id}}">Ver</a>
-                                <a class="btn btn-outline-secondary" th:href="@{'/ui/products/' + ${product.id} + '/edit'}">Editar</a>
-                                <form th:action="@{'/ui/products/' + ${product.id} + '/delete'}" method="post" class="d-inline">
-                                    <button type="submit" class="btn btn-outline-danger"
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-sm btn-primary rounded-pill"
+                                   th:href="@{'/ui/products/' + ${product.id}}">
+                                    Ver
+                                </a>
+
+                                <a class="btn btn-sm btn-warning rounded-pill text-dark"
+                                   th:href="@{'/ui/products/' + ${product.id} + '/edit'}">
+                                    Editar
+                                </a>
+
+                                <form th:action="@{'/ui/products/' + ${product.id} + '/delete'}"
+                                      method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger rounded-pill"
                                             onclick="return confirm('¿Deseas eliminar este producto?');">
                                         Eliminar
                                     </button>
