@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::body}, ${pageTitle})}">
+<body>
+<section class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3 mb-4">
+                    <div>
+                        <p class="text-muted mb-1">Detalle del producto</p>
+                        <h2 class="h3 mb-0" th:text="${product.name}">Nombre</h2>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-secondary" th:href="@{'/ui/products/' + ${product.id} + '/edit'}">Editar</a>
+                        <a class="btn btn-link" th:href="@{/ui/products}">Volver a la lista</a>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+                            <span class="text-uppercase text-muted small">Precio</span>
+                            <p class="fs-4 fw-semibold mb-0" th:text="${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+                            <span class="text-uppercase text-muted small">Stock disponible</span>
+                            <p class="fs-4 fw-semibold mb-0" th:text="${product.stock}">0</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="border rounded-3 p-3 bg-white">
+                            <span class="text-uppercase text-muted small">Descripción</span>
+                            <p class="mb-0" th:text="${product.description ?: 'Sin descripción disponible'}">Texto</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center bg-body-secondary rounded-3 p-3">
+                            <span class="text-muted">Creado el</span>
+                            <strong class="fs-6"
+                                    th:text="${product.createdAt != null ? #temporals.format(product.createdAt, 'dd/MM/yyyy HH:mm') : 'N/D'}">
+                                01/01/2024 12:00
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
