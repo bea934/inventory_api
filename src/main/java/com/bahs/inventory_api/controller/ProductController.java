@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador REST encargado de exponer los endpoints CRUD para productos.
+ * Controlador REST que expone los endpoints CRUD bajo la ruta base {@code /api/products}.
  */
 @RestController
 @RequestMapping("/api/products")
@@ -28,7 +28,7 @@ public class ProductController {
     private final ProductService productService;
 
     /**
-     * Endpoint para listar todos los productos disponibles.
+     * Maneja {@code GET /api/products} y retorna todos los productos disponibles.
      *
      * @return respuesta con la lista completa
      */
@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     /**
-     * Endpoint para recuperar un producto específico por su identificador.
+     * Maneja {@code GET /api/products/{id}} para recuperar un producto por su identificador.
      *
      * @param id identificador del producto
      * @return respuesta con el producto encontrado
@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     /**
-     * Endpoint para crear un nuevo producto con validación de datos de entrada.
+     * Maneja {@code POST /api/products} para crear un nuevo producto con validación.
      *
      * @param request DTO con los datos del producto
      * @return respuesta con el recurso creado y cabecera Location
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     /**
-     * Endpoint para actualizar un producto existente.
+     * Maneja {@code PUT /api/products/{id}} para actualizar un producto existente.
      *
      * @param id identificador del producto
      * @param request DTO con los nuevos datos
@@ -73,7 +73,7 @@ public class ProductController {
     }
 
     /**
-     * Endpoint para eliminar un producto por su identificador.
+     * Maneja {@code DELETE /api/products/{id}} para eliminar un producto por su identificador.
      *
      * @param id identificador del producto
      * @return respuesta sin contenido (204)

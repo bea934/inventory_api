@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controlador MVC que ofrece una experiencia completa con Thymeleaf para gestionar
- * productos sin interferir con los endpoints REST existentes bajo /products.
+ * Controlador MVC (Thymeleaf) responsable de la experiencia HTML bajo {@code /products},
+ * independiente de la API REST expuesta en {@code /api/products}.
  */
 @Controller
 @RequestMapping("/products")
@@ -26,7 +26,7 @@ public class ProductViewController {
     private final ProductService productService;
 
     /**
-     * Muestra la lista completa de productos en la interfaz web.
+     * Maneja {@code GET /products} y muestra la lista completa de productos en la interfaz web.
      */
     @GetMapping
     public String listProducts(Model model) {
@@ -36,7 +36,7 @@ public class ProductViewController {
     }
 
     /**
-     * Muestra el formulario vacío para crear un producto.
+     * Maneja {@code GET /products/new} y muestra el formulario vacío para crear un producto.
      */
     @GetMapping("/new")
     public String showCreateForm(Model model) {
@@ -47,7 +47,7 @@ public class ProductViewController {
     }
 
     /**
-     * Procesa el formulario de creación y delega la persistencia al servicio.
+     * Maneja {@code POST /products} y procesa el formulario de creación.
      */
     @PostMapping
     public String createProduct(@Valid @ModelAttribute("product") ProductRequest request,
@@ -63,7 +63,7 @@ public class ProductViewController {
     }
 
     /**
-     * Muestra el detalle de un producto en una tarjeta informativa.
+     * Maneja {@code GET /products/{id}} y muestra el detalle de un producto en una tarjeta informativa.
      */
     @GetMapping("/{id}")
     public String viewProduct(@PathVariable Long id, Model model) {
@@ -74,7 +74,7 @@ public class ProductViewController {
     }
 
     /**
-     * Muestra el formulario con los datos cargados para editar un producto.
+     * Maneja {@code GET /products/{id}/edit} y muestra el formulario con los datos cargados para editar.
      */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -85,7 +85,7 @@ public class ProductViewController {
     }
 
     /**
-     * Actualiza un producto existente con los datos capturados en la UI.
+     * Maneja {@code POST /products/{id}} para actualizar un producto desde la UI.
      */
     @PostMapping("/{id}")
     public String updateProduct(@PathVariable Long id,
@@ -102,7 +102,7 @@ public class ProductViewController {
     }
 
     /**
-     * Elimina un producto y regresa a la lista de la interfaz web.
+     * Maneja {@code POST /products/{id}/delete} y elimina un producto antes de regresar a la lista.
      */
     @PostMapping("/{id}/delete")
     public String deleteProduct(@PathVariable Long id) {
