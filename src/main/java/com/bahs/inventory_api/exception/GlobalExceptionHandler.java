@@ -7,13 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import com.bahs.inventory_api.controller.ProductController;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * Maneja las excepciones de la aplicación y retorna respuestas JSON consistentes.
+ * Maneja las excepciones del controlador REST {@link ProductController} y retorna respuestas JSON consistentes.
  */
-@ControllerAdvice
+@RestControllerAdvice(assignableTypes = ProductController.class)
 public class GlobalExceptionHandler {
 
     /**

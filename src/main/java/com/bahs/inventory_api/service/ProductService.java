@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Servicio que encapsula la lógica de negocio relacionada con productos y
- * delega las operaciones persistentes al {@link ProductRepository}.
+ * delega las operaciones persistentes al {@link ProductRepository}. Es reutilizado
+ * tanto por el controlador REST ({@code /api/products}) como por el controlador de vistas ({@code /products}).
  */
 @Slf4j
 @Service
