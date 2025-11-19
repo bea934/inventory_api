@@ -119,6 +119,3 @@ Incluye tus capturas para enriquecer el portafolio:
 
 ¡Las contribuciones son bienvenidas! Abre un issue o envía un pull request siguiendo las mejores prácticas de Git.
 
-## Licencia
-
-Este proyecto se publica bajo la licencia MIT. Consulta el archivo `LICENSE` (o crea uno nuevo) para más información.
