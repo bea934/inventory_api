@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * productos sin interferir con los endpoints REST existentes bajo /products.
  */
 @Controller
-@RequestMapping("/ui/products")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductViewController {
 
@@ -42,7 +42,7 @@ public class ProductViewController {
     public String showCreateForm(Model model) {
         model.addAttribute("product", new ProductRequest());
         model.addAttribute("pageTitle", "Crear producto");
-        populateFormModel(model, "Crear producto", "/ui/products", null, "Guardar");
+        populateFormModel(model, "Crear producto", "/products", null, "Guardar");
         return "products/form";
     }
 
@@ -55,11 +55,11 @@ public class ProductViewController {
                                 Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("pageTitle", "Crear producto");
-            populateFormModel(model, "Crear producto", "/ui/products", null, "Guardar");
+            populateFormModel(model, "Crear producto", "/products", null, "Guardar");
             return "products/form";
         }
         productService.create(request);
-        return "redirect:/ui/products";
+        return "redirect:/products";
     }
 
     /**
@@ -78,10 +78,9 @@ public class ProductViewController {
      */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Product product = productService.findById(id);
-        model.addAttribute("product", toProductRequest(product));
+        model.addAttribute("product", productService.getProductForm(id));
         model.addAttribute("pageTitle", "Editar producto");
-        populateFormModel(model, "Editar producto", "/ui/products/" + id, id, "Actualizar");
+        populateFormModel(model, "Editar producto", "/products/" + id, id, "Actualizar");
         return "products/form";
     }
 
@@ -95,11 +94,11 @@ public class ProductViewController {
                                 Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("pageTitle", "Editar producto");
-            populateFormModel(model, "Editar producto", "/ui/products/" + id, id, "Actualizar");
+            populateFormModel(model, "Editar producto", "/products/" + id, id, "Actualizar");
             return "products/form";
         }
         productService.update(id, request);
-        return "redirect:/ui/products";
+        return "redirect:/products";
     }
 
     /**
@@ -108,16 +107,7 @@ public class ProductViewController {
     @PostMapping("/{id}/delete")
     public String deleteProduct(@PathVariable Long id) {
         productService.delete(id);
-        return "redirect:/ui/products";
-    }
-
-    private ProductRequest toProductRequest(Product product) {
-        ProductRequest request = new ProductRequest();
-        request.setName(product.getName());
-        request.setDescription(product.getDescription());
-        request.setPrice(product.getPrice());
-        request.setStock(product.getStock());
-        return request;
+        return "redirect:/products";
     }
 
     private void populateFormModel(Model model, String formTitle, String formAction, Long productId, String submitLabel) {

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     /**
      * Obtiene todos los productos registrados en la base de datos.
@@ -55,8 +56,7 @@ public class ProductService {
      */
     public Product create(ProductRequest request) {
         log.info("Creando un nuevo producto con nombre {}", request.getName());
-        Product product = new Product();
-        applyRequestData(product, request);
+        Product product = productMapper.toEntity(request);
         return productRepository.save(product);
     }
 
@@ -70,7 +70,7 @@ public class ProductService {
     public Product update(Long id, ProductRequest request) {
         log.info("Actualizando producto con id {}", id);
         Product product = findById(id);
-        applyRequestData(product, request);
+        productMapper.updateEntity(request, product);
         return productRepository.save(product);
     }
 
@@ -85,17 +85,9 @@ public class ProductService {
         productRepository.delete(product);
     }
 
-    /**
-     * Copia los valores del DTO al entity para reutilizar la lógica entre
-     * creación y actualización.
-     *
-     * @param product entidad objetivo
-     * @param request datos de entrada
-     */
-    private void applyRequestData(Product product, ProductRequest request) {
-        product.setName(request.getName());
-        product.setDescription(request.getDescription());
-        product.setPrice(request.getPrice());
-        product.setStock(request.getStock());
+    @Transactional(readOnly = true)
+    public ProductRequest getProductForm(Long id) {
+        Product product = findById(id);
+        return productMapper.toRequest(product);
     }
 }

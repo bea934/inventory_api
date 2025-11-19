@@ -9,7 +9,7 @@
             <p class="text-muted mb-0">Consulta, crea o modifica productos usando la misma base de datos que la API.</p>
         </div>
         <div class="text-md-end">
-            <a class="btn btn-primary" th:href="@{/ui/products/new}">Nuevo producto</a>
+            <a class="btn btn-primary" th:href="@{/products/new}">Nuevo producto</a>
         </div>
     </div>
 </section>
@@ -44,16 +44,16 @@
                         <td class="text-end">
                             <div class="btn-group" role="group">
                                 <a class="btn btn-sm btn-primary rounded-pill"
-                                   th:href="@{'/ui/products/' + ${product.id}}">
+                                   th:href="@{'/products/' + ${product.id}}">
                                     Ver
                                 </a>
 
                                 <a class="btn btn-sm btn-warning rounded-pill text-dark"
-                                   th:href="@{'/ui/products/' + ${product.id} + '/edit'}">
+                                   th:href="@{'/products/' + ${product.id} + '/edit'}">
                                     Editar
                                 </a>
 
-                                <form th:action="@{'/ui/products/' + ${product.id} + '/delete'}"
+                                <form th:action="@{'/products/' + ${product.id} + '/delete'}"
                                       method="post" class="d-inline">
                                     <button type="submit" class="btn btn-sm btn-danger rounded-pill"
                                             onclick="return confirm('¿Deseas eliminar este producto?');">

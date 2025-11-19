@@ -12,8 +12,8 @@
                         <h2 class="h3 mb-0" th:text="${product.name}">Nombre</h2>
                     </div>
                     <div class="d-flex gap-2">
-                        <a class="btn btn-outline-secondary" th:href="@{'/ui/products/' + ${product.id} + '/edit'}">Editar</a>
-                        <a class="btn btn-link" th:href="@{/ui/products}">Volver a la lista</a>
+                        <a class="btn btn-outline-secondary" th:href="@{'/products/' + ${product.id} + '/edit'}">Editar</a>
+                        <a class="btn btn-link" th:href="@{/products}">Volver a la lista</a>
                     </div>
                 </div>
                 <div class="row g-4">
