@@ -14,7 +14,7 @@ Inventario API es una aplicación full stack construida con Spring Boot que comb
 
 | Tecnología | Descripción |
 | --- | --- |
-| ![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white) | Lenguaje principal del backend |
+| ![Java](https://img.shields.io/badge/Java-25-007396?logo=openjdk&logoColor=white) | Lenguaje principal del backend |
 | ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white) | Framework para la API REST y MVC |
 | ![Maven](https://img.shields.io/badge/Maven-Build%20Tool-C71A36?logo=apachemaven&logoColor=white) | Gestión de dependencias y tareas |
 | ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-Templating-005F0F?logo=thymeleaf&logoColor=white) | Motor de plantillas para la UI |
@@ -23,7 +23,7 @@ Inventario API es una aplicación full stack construida con Spring Boot que comb
 
 ## Requisitos previos
 
-- Java 21
+- Java 25
 - Maven 3.9+
 - Git
 
